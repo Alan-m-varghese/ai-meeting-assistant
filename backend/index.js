@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const summaryRoutes = require('./routes/summaryRoutes');
-const { authRouter } = require('./googleAuth');
+const authRouter = require('./googleAuth');
 const app = express();
 app.use(cors());
 app.use(express.json());
