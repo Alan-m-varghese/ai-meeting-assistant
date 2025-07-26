@@ -89,12 +89,4 @@ document.getElementById('stop').onclick = () => {
   document.getElementById('stop').disabled = true;
 };
 
-// 🔁 Helper to convert audio blob to base64
-function blobToBase64(blob) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result.split(',')[1]); // remove base64 prefix
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-}
+
