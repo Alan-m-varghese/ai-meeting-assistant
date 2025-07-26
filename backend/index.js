@@ -10,4 +10,4 @@ app.use('/api/summary', summaryRoutes);
 app.use('/auth/google', authRouter);
 app.get('/', (req, res) => res.send('Backend is running'));
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server on https://ai-meeting-assistant-brhj.onrender.com:${PORT}`));

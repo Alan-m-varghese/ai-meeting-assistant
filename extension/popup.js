@@ -1,7 +1,7 @@
 let mediaRecorder, audioChunks = [], accessToken = null;
 
 document.getElementById('login').onclick = () => {
-  window.open('http://localhost:5000/auth/google', '_blank');
+  window.open('https://ai-meeting-assistant-brhj.onrender.com/auth/google', '_blank');
   window.addEventListener('message', e => {
     if (e.data.access_token) {
       accessToken = e.data.access_token;
@@ -20,7 +20,7 @@ document.getElementById('start').onclick = async () => {
     const blob = new Blob(audioChunks, { type: 'audio/webm' });
     const arrayBuffer = await blob.arrayBuffer();
     document.getElementById('status').innerText = 'Uploading...';
-    const uploadRes = await fetch('http://localhost:5000/api/summary', {
+    const uploadRes = await fetch('https://ai-meeting-assistant-brhj.onrender.com/api/summary', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ audioUrl: URL.createObjectURL(blob), accessToken })
