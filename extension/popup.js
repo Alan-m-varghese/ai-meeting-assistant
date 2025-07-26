@@ -29,6 +29,19 @@ document.getElementById('login').onclick = () => {
   });
 };
 
+// Helper to convert Blob to Base64
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result.split(',')[1]); // get base64 string only
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+
+
+
 document.getElementById('start').onclick = async () => {
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   mediaRecorder = new MediaRecorder(stream);
