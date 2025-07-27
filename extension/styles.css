@@ -1,4 +1,4 @@
 body { font-family: Arial; width:300px; padding:10px; color: aqua; background: #4f4e4e;   }
-button { margin:5px 0; width:100% }
+button { margin:5px 0; width:100% ; background: #78b0e7; color: white; border: none; padding: 10px; cursor: pointer; ; border-radius: 10px; }
 pre { background:#4f4e4e; padding:10px; max-height:150px; overflow:auto }
 a { display: block; margin-top: 10px; color:#0066CC }

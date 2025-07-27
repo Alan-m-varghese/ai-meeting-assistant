@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data && data.access_token) {
         accessToken = data.access_token;
         localStorage.setItem('google_access_token', accessToken);
-
         document.getElementById('login').disabled = true;
         document.getElementById('status').innerText = '✅ Logged in with Google';
         document.getElementById('start').disabled = false;
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // ✅ Enable Start button if already logged in
+  // ✅ If already logged in
   if (accessToken) {
     document.getElementById('login').disabled = true;
     document.getElementById('status').innerText = '✅ Logged in with Google';
@@ -54,4 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('start').disabled = false;
     document.getElementById('status').innerText = '⏳ Processing...';
   };
+
+  // ✅ Listen for transcription results from content script
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'showSummary') {
+      document.getElementById('summary').textContent = message.summary;
+      document.getElementById('docLink').href = message.docUrl || '#';
+      document.getElementById('docLink').textContent = '📄 View Google Doc';
+      document.getElementById('docLink').style.display = 'inline';
+      document.getElementById('status').innerText = '✅ Summary Ready';
+    }
+  });
 });

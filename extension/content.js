@@ -21,12 +21,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         mediaRecorder.addEventListener('stop', () => {
           const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-
-          // Send blob to background or server
           uploadAudio(audioBlob, request.accessToken);
         });
 
-        console.log('[AI Meeting Assistant] Recording started');
+        console.log('[AI Meeting Assistant] 🎤 Recording started');
       })
       .catch(err => {
         console.error('[Mic Error]', err);
@@ -37,7 +35,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (mediaRecorder && isRecording) {
       mediaRecorder.stop();
       isRecording = false;
-      console.log('[AI Meeting Assistant] Recording stopped');
+      console.log('[AI Meeting Assistant] 🛑 Recording stopped');
     }
   }
 });
@@ -56,10 +54,18 @@ function uploadAudio(blob, accessToken) {
     .then(res => res.json())
     .then(data => {
       console.log('✅ Transcription result:', data);
-      // Send result to popup if needed
-      chrome.runtime.sendMessage({ action: 'showSummary', summary: data.summary });
+      chrome.runtime.sendMessage({
+        action: 'showSummary',
+        summary: data.summary || 'No summary generated.',
+        docUrl: data.docUrl
+      });
     })
     .catch(err => {
       console.error('❌ Upload/Transcription error:', err);
+      chrome.runtime.sendMessage({
+        action: 'showSummary',
+        summary: '❌ Upload or transcription failed.',
+        docUrl: '#'
+      });
     });
 }
