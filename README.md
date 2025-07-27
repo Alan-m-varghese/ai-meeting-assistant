@@ -27,7 +27,7 @@ Effortlessly capture, transcribe, summarize, and document your online meetings i
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/yourusername/ai-meeting-assistant.git
+   git clone https://github.com/Alan-m-varghese/ai-meeting-assistant.git
    cd ai-meeting-assistant
 2.Go to chrome://extensions/ in your browser
 
