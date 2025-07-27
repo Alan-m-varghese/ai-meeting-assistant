@@ -1,0 +1,20 @@
+<!-- mic.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mic Permission</title>
+</head>
+<body>
+  <script>
+    async function getMicPermission() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        parent.postMessage({ micAllowed: true }, "*");
+      } catch (err) {
+        parent.postMessage({ micAllowed: false }, "*");
+      }
+    }
+    getMicPermission();
+  </script>
+</body>
+</html>
